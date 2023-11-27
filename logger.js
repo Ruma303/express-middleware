@@ -1,18 +1,9 @@
-var express = require('express')
-var fs = require('fs')
-var morgan = require('morgan')
-var path = require('path')
+    var express = require('express'), fs = require('fs'), morgan = require('morgan'),
+        path = require('path'), app = express(),
+        accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' });
 
-var app = express()
+    app.use(morgan('combined', { stream: accessLogStream }))
+        .get('/', function (req, res) {
+        res.send('hello, world!')
+    }).listen(3000);
 
-
-// create a write stream (in append mode)
-var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
-
-// setup the logger
-app.use(morgan('combined', { stream: accessLogStream }))
-
-app.get('/', function (req, res) {
-  res.send('hello, world!')
-});
-app.listen(3000);
