@@ -57,22 +57,28 @@
     //app.use('/admin', morgan('combined'));
 
 
+    //% Helmet
+    /* const helmet = require('helmet');
+    app.use(helmet()); */
+
+
     //% Middleware di Autenticazione ed Autorizzazione
     const morgan = require('morgan');
     app.use(morgan('dev'));
 
-    //app.get('/auth', checkAuthentication, checkAuthorization).listen(PORT);
+    app.get('/auth', checkAuthentication, checkAuthorization);
+    //app.get('/', (req, res) => res.send('Sei nella homepage'));
 
     function checkAuthentication(req, res, next) {
         const { user } = req.query;
         const isAuthenticated = user === 'admin' ? true :
                 user === 'staff' ? true : false;
-
         if (isAuthenticated) {
             req.user = user;
             return next();
         } else {
             return res.status(401).send('Non puoi accedere a questa risorsa');
+            //return res.redirect('/'); //# redirect
         }
     }
 
@@ -85,6 +91,7 @@
             return res.status(403).send('Accesso al back office come staff');
         }
     }
+
 
 
     //, Middleware globali
@@ -137,10 +144,3 @@
 
     //# Cartella virtuale
     //app.use('/assets', express.static('public'));
-
-
-
-    //% Gestione errori
-
-
-    //# Redirect
