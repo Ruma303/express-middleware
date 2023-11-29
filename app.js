@@ -4,6 +4,7 @@
     const PORT = process.env.PORT || 3000;
     app.listen(PORT);
 
+
     //% Middleware
 
     /* app.get('/', (req, res) => {
@@ -63,7 +64,7 @@
 
 
     //% Middleware di Autenticazione ed Autorizzazione
-    const morgan = require('morgan');
+    /* const morgan = require('morgan');
     app.use(morgan('dev'));
 
     app.get('/auth', checkAuthentication, checkAuthorization);
@@ -90,7 +91,7 @@
         } else {
             return res.status(403).send('Accesso al back office come staff');
         }
-    }
+    } */
 
 
 
@@ -118,6 +119,17 @@
         .get('/user/:id', (req, res) => res.send('Rotta con middleware'))
         .get('/risorsa', (req, res) => res.send('Ecco la risorsa'))
         .listen(PORT); */
+
+
+
+    //, Fallback
+    /* app.get('*', (req, res) => {
+        res.status(404).send('Pagina non trovata');
+    }); */
+
+    /* app.get('/', (req, res) => {
+        res.status(200).send('Homepage');
+    }); */
 
 
     //% Middleware built-in
