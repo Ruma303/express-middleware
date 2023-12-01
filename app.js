@@ -11,4 +11,8 @@
     //# Altre rotte
     app.get('/auth', isAuth, permissions);
 
+    //# Errori
+    const error = require('./middleware/error');
+    app.use(error);
+
 
