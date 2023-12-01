@@ -152,3 +152,9 @@
 
     //# Cartella virtuale
     //app.use('/assets', express.static(path.join(__dirname, 'public')));
+
+
+    //# Download
+    app.get('/download', (req, res) => {
+        res.download(path.join(__dirname, 'public', 'img', 'pizza-small.png'));
+    });
